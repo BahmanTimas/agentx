@@ -32,8 +32,8 @@ def app_start(request):
         post_detail.save()
 
         oauth_grant_url = divar.create_oauth_init_url(
-            post_token=divar_post_token, 
-            scope='CHAT_POST_CONVERSATIONS_READ'
+            post_token=divar_post_token,
+            scope=f'CHAT_POST_CONVERSATIONS_READ.{divar_post_token}+CHAT_POST_CONVERSATIONS_MESSAGE_SEND.{divar_post_token}'
         )
 
         return redirect(oauth_grant_url)
@@ -107,6 +107,7 @@ authorization: {{ identification_key }}
     
     post_detail = PostDetail.objects.get(poster_token=post_token)
     
+    # TODO: find based on divar_conversation_id?
     conversation, created = Conversation.objects.get_or_create(
         post=post_detail,
         user_id=sender.get("id"),
