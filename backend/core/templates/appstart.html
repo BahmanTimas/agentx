@@ -141,7 +141,7 @@
         method="POST"
         action="{% url 'app-start' %}?{{ request.GET.urlencode }}"
       >
-        <!-- {% csrf_token %} -->
+        {% csrf_token %}
         <textarea
           name="knowledge"
           class="text-area"
