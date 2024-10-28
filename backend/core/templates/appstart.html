@@ -26,26 +26,45 @@
         background: white;
         border-radius: 10px;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
+        padding: 1.1rem 2rem 2rem 2rem;
         text-align: center;
         width: 90%;
       }
-      .header {
-        background-color: #1a73e813;
-        width: fit-content;
-        margin: 0 auto;
-        padding: 2px 20px 0 20px;
-        border-radius: 6px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #1a73e8;
+      .header-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid rgb(179, 179, 179);
+        padding-bottom: 0.5rem;
         margin-bottom: 1rem;
       }
-      .header3 {
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        width: fit-content;
+        padding: 2px 20px 0 0px;
+        border-radius: 6px;
         font-size: 1.2rem;
+        font-weight: 400;
+        color: #ce1b22;
+      }
+      .header p {
+        margin: 0;
+        padding-left: 8px;
+        border-left: 1px solid #ce1b22;
+      }
+      .header p span {
+        /* font-weight: 500; */
+      }
+      .header img {
+        position: relative;
+        top: -2px;
+      }
+      .header3 {
+        font-size: 0.9rem;
         font-weight: bold;
-        color: #1a73e8;
-        margin-bottom: 1rem;
+        color: #ce1b22;
       }
       .description {
         font-size: 1rem;
@@ -55,6 +74,9 @@
       }
       .form {
         width: 100%;
+      }
+      .text-area-container {
+        position: relative;
       }
       .text-area {
         width: 90%;
@@ -68,8 +90,38 @@
         color: #606060;
         font-family: "Vazir", Arial, sans-serif;
       }
+      .coming-soon-btns {
+        margin-right: 10px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+      .coming-soon-btn::after {
+        content: "به زودی";
+        display: none;
+        position: absolute;
+        padding: 0.3rem 0.6rem;
+        background: #454545;
+        color: #fff;
+        font-size: 0.8rem;
+        border-radius: 3px;
+        top: -35px;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .coming-soon-btn:hover::after {
+        display: block;
+        opacity: 1;
+      }
+      .coming-soon-btns {
+        position: relative;
+
+        cursor: pointer;
+        opacity: 0.6;
+      }
       .text-area:focus-within {
-        outline: 2px solid #1a73e8 !important;
+        outline: 2px solid #00b959 !important;
       }
       .button-container {
         margin-top: 2rem;
@@ -78,31 +130,31 @@
       }
       .action-button,
       .cancel-button {
-        background-color: #1a73e8;
+        background-color: #ce1b22;
         color: white;
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
         flex: 1;
         margin: 0 0.5rem;
         font-family: "Vazir", Arial, sans-serif;
       }
       .action-button:hover {
-        background-color: #155ab7;
+        background-color: #b1161b;
       }
       .cancel-button {
-        color: #f44336;
+        color: #717070;
         background-color: transparent;
-        border: 2px solid #f44336;
+        border: 2px solid #717070;
         font-family: "Vazir", Arial, sans-serif;
       }
       .cancel-button:hover {
-        color: #d32f2f;
-        background-color: #d32f2f0f;
-        border: 2px solid #d32f2f;
+        color: #000000;
+        background-color: #7170700f;
+        border: 2px solid #000000;
       }
       @media (max-width: 600px) {
         body {
@@ -121,15 +173,45 @@
         .cancel-button {
           margin: 0.5rem 0;
         }
+        .button-container {
+          margin-top: 1rem;
+        }
+      }
+      @media (max-width: 400px) {
+        .header {
+          padding: 2px 6px 0 0px;
+        }
+        .header p {
+          display: none;
+        }
+        .description {
+          font-size: 0.9rem;
+        }
+        .header3 {
+          font-size: 0.8rem;
+        }
+        .button-container {
+          margin-top: 0.3rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="header">Agent X</div>
-      <h3 class="header3">افزونه مذاکره هوشمند برای فروشندگان دیوار</h3>
+      <div class="header-div">
+        <h3 class="header3">افزونه مذاکره هوشمند برای فروشندگان دیوار</h3>
+        <div class="header">
+          <p>AGENT<span>x</span></p>
+          <img
+            width="30"
+            height="30"
+            src="./statics/AgentXLogo.svg"
+            alt="logo"
+          />
+        </div>
+      </div>
       <div class="description">
-        Agent-X یک دستیار هوشمند چت و مذاکره است که به طور خودکار با مشتری‌ها
+        ایجنت ایکس یک دستیار هوشمند چت و مذاکره است که به طور خودکار با مشتری‌ها
         گفتگو می‌کند و بر اساس اطلاعات آگهی و دستورالعمل‌های فروشنده، پاسخ‌های
         هوشمند ارائه می‌دهد. <br />
         در صورت مثبت بودن روند مذاکره، به فروشنده اطلاع می‌دهد تا فرآیند فروش
@@ -142,11 +224,26 @@
         action="{% url 'app-start' %}?{{ request.GET.urlencode }}"
       >
         {% csrf_token %}
-        <textarea
-          name="knowledge"
-          class="text-area"
-          placeholder="اطلاعات مربوط به پست و هر گونه دستورالعمل برای پاسخ‌گویی موثرتر را وارد کنید..."
-        ></textarea>
+        <div class="text-area-container">
+          <textarea
+            name="knowledge"
+            class="text-area"
+            placeholder="اطلاعات مربوط به پست و هر گونه دستورالعمل برای پاسخ‌گویی موثرتر را وارد کنید..."
+          ></textarea>
+          <div class="coming-soon-btns">
+            <div class="coming-soon-btn">
+              <img src="./statics/mic.png" alt="attach-file" width="20" />
+            </div>
+            <div class="coming-soon-btn">
+              <img
+                class="coming-soon-btn"
+                src="./statics/file.png"
+                alt="attach-file"
+                width="20"
+              />
+            </div>
+          </div>
+        </div>
         <div class="button-container">
           <button type="submit" class="action-button">فعال‌سازی افزونه</button>
           <button type="button" class="cancel-button">لغو</button>
