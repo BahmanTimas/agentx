@@ -55,7 +55,7 @@ Post Details:
 - Price: {price} ({price_mode})
 - Location: {location}
 - Description: {description}
-- Other Details: {} #TODO: knowdelge here
+- Other Details: {conversation.post.knowledge} #TODO: knowdelge here
 Previous Conversation:
 {conversation_history}
 
