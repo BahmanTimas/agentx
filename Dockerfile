@@ -44,9 +44,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # copy project
 COPY . $APP_HOME
 
-# TODO: remove after add postgresql
-RUN mkdir sqlite
-
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
 
