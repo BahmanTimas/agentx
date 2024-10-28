@@ -8,6 +8,7 @@ class PostDetail(models.Model):
     divar_post_return_url = models.TextField(null=False, blank=False, unique=True)
     divar_post_data = models.JSONField(null=False, blank=False, default=dict)
     divar_access_token = models.JSONField(null=True, blank=True, default=dict)
+    divar_on_message_setup = models.BooleanField(null=False, blank=False, default=False)
     knowledge = models.TextField(null=True, blank=True)
 
 

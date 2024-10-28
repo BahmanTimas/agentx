@@ -34,6 +34,7 @@ def get_access_token(code):
     if response.status_code == 200:
         return response.json()
     else:
+        print(response.json())
         response.raise_for_status()
 
 

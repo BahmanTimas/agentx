@@ -138,12 +138,12 @@ def oauth_callback(request):
     # scope = request.GET.get("scope")
     state = request.GET.get("state")
     code = request.GET.get("code")
-    post_token = state.split("_")[0]
+    divar_post_token = state.split("_")[0]
 
     divar_access_token = divar.get_access_token(code)
 
     # get access token save it in the post and return to post return url
-    post_detail = PostDetail.objects.filter(divar_post_token).first()
+    post_detail = PostDetail.objects.filter(divar_post_token=divar_post_token).first()
     post_detail.divar_access_token = divar_access_token
     post_detail.save()
 
@@ -151,5 +151,7 @@ def oauth_callback(request):
 
     # TODO: response? save the response? error handling
     divar.setup_post_on_message_hook(divar_post_token, divar_access_token.get("access_token"))
+    post_detail.divar_on_message_setup = True
+    post_detail.save()
 
     return redirect(post_detail.divar_post_return_url)
