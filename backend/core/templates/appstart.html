@@ -202,10 +202,11 @@
         <h3 class="header3">افزونه مذاکره هوشمند برای فروشندگان دیوار</h3>
         <div class="header">
           <p>AGENT<span>x</span></p>
+          {% load static %}
           <img
             width="30"
             height="30"
-            src="./statics/AgentXLogo.svg"
+            src="{% static 'AgentXLogo.svg' %}"
             alt="logo"
           />
         </div>
@@ -232,12 +233,12 @@
           ></textarea>
           <div class="coming-soon-btns">
             <div class="coming-soon-btn">
-              <img src="./statics/mic.png" alt="attach-file" width="20" />
+              <img src="{% static 'mic.png' %}" alt="attach-file" width="20" />
             </div>
             <div class="coming-soon-btn">
               <img
                 class="coming-soon-btn"
-                src="./statics/file.png"
+                src="{% static 'file.png' %}"
                 alt="attach-file"
                 width="20"
               />
