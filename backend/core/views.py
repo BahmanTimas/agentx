@@ -54,9 +54,9 @@ def chat_start(request):
 
     # chi bebine? bere OAuth2? ke beshe chat kone?
 
-    print(request.body)  #{"callback_url":"https://open-platform-redirect.divar.ir/completion","post_token":"post-token","user_id":"demand_id","peer_id":"supplier_id","supplier":{"id":"supplier_id"},"demand":{"id":"demand_id"}}
+    print(request.POST)  #{"callback_url":"https://open-platform-redirect.divar.ir/completion","post_token":"post-token","user_id":"demand_id","peer_id":"supplier_id","supplier":{"id":"supplier_id"},"demand":{"id":"demand_id"}}
     
-    return JsonResponse({"status": "ok"})
+    return Response(request.POST.get("callback_url"))
 
 
 @api_view(["POST"])
