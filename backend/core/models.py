@@ -17,6 +17,5 @@ class Conversation(models.Model):
     update_at = models.DateTimeField(auto_now_add=True)
     divar_conversation_id = models.TextField(null=False, blank=False, unique=True)
     post = models.ForeignKey(PostDetail, on_delete=models.PROTECT, null=False, blank=False)
-    user_id = models.TextField(null=False, blank=False)
     messages = models.JSONField(null=False, blank=False, default=list)
     status = models.TextField(null=True, blank=True)

@@ -89,9 +89,18 @@ def send_message(oauth_access_token, conversation_id, message):
         "message": message
     }
 
+    # Construct curl command
+    import json
+    curl_command = f"curl -X POST '{url}' " + \
+                   " ".join([f"-H '{key}: {value}'" for key, value in headers.items()]) + \
+                   f" -d '{json.dumps(payload)}'"
+
+    print("cURL command:", curl_command)  # Print the curl command for debugging
+
     response = requests.post(url, json=payload, headers=headers)
     
     if response.status_code == 200:
         return response.json()
     else:
+
         response.raise_for_status()

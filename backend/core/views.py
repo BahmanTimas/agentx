@@ -70,6 +70,8 @@ authorization: {{ identification_key }}
 {'payload': {'@type': 'type.googleapis.com/notify.ChatMessagePayload', 'data': {'@type': 'type.googleapis.com/notify.ChatMessageTextData', 'text': 'سلام'}, 'from': None, 'id': 'd8e03e89-952d-11ef-9e44-0629b783fb1b', 'metadata': {'category': 'craftsmen', 'post_token': 'wZecbxRh', 'title': 'لوله\u200cکش گران'}, 'receiver': {'id': '69c9281d-4540-4073-b0a0-ef2e8a05948f', 'is_supply': True}, 'sender': {'id': 'b1abebff-e10a-4ac0-aeee-6dbaa630088c', 'is_supply': False}, 'sent_at': '1730120961634000', 'to': None, 'type': 'TEXT'}, 'timestamp': '1730120961', 'type': 'CHAT_MESSAGE'}
     """
 
+    print("Response Headers:", request.headers)
+
     data = json.loads(request.body.decode('utf-8'))
 
     print(f"receive on message payload: {data}")
@@ -83,12 +85,17 @@ authorization: {{ identification_key }}
     
     post_detail = PostDetail.objects.get(divar_post_token=divar_post_token)
     
-    # TODO: find based on divar_conversation_id?
     conversation, created = Conversation.objects.get_or_create(
         post=post_detail,
-        user_id=sender.get("id"),
         divar_conversation_id=data.get("payload").get("id")
     )
+
+    conversation = Conversation.objects.filter(divar_conversation_id=data.get("payload").get("id")).first()
+    if not conversation:
+        conversation = Conversation.objects.create(
+            post=post_detail,
+            divar_conversation_id=data.get("payload").get("id")
+        )
 
     conversation.messages.append(data)
     conversation.save()
@@ -103,7 +110,7 @@ authorization: {{ identification_key }}
     #TODO: async it
 
     process_conversation_update(conversation)
-    
+
     return Response(status=200)
 
 
@@ -130,7 +137,7 @@ def oauth_callback(request):
     # TODO: do we need a middle page that notify the user we are processing the data needed?
 
     # TODO: response? save the response? error handling
-    if not post_detailpost_detail:
+    if not post_detail:
         divar.setup_post_on_message_hook(divar_post_token, divar_access_token.get("access_token"))
         post_detail = True
         post_detail.save()

@@ -5,8 +5,12 @@ import json
 
 def process_conversation_update(conversation: Conversation):
     prompt = generate_prompt(conversation)
+    print(f"agentx prompt:\n{prompt}")
     completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
+
+    print(f"user message:\n{conversation.messages[len(conversation.messages)-1]}")
+    print(f"agentx respond:\n{result}")
 
     divar.send_message(
         conversation.post.divar_access_token.get("access_token"), conversation.divar_conversation_id, result
@@ -36,14 +40,16 @@ def generate_prompt(conversation: Conversation) -> str:
     # Format the prompt
     prompt = f"""
 You are a chatbot assistant for a post on Divar.ir.
-Respond concisely based on the following post details and previous conversation.
+Respond concisely based on the following post details and previous conversation only to the latest client message.
 
 Post Details:
 {conversation.post.divar_post_data}
+Supply Instruction:
+{conversation.post.knowledge}
 Previous Conversation:
 {conversation_history}
 
-Response:
+Response in friendly persian language to latest client message:
 """
     return prompt.strip()
 
