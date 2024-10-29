@@ -66,7 +66,7 @@ def generate_prompt(conversation: Conversation) -> str:
         prompt = (prompt_template.replace("{conversation.post.divar_post_data}", conversation.post.divar_post_data)
                   .replace("{conversation.post.knowledge}", conversation.post.knowledge)
                   .replace("{conversation_history}", conversation_history)
-                  .replace("{client_message}", conversation.messages[len(conversation.messages)-1]))
+                  .replace("{client_message}", conversation.messages[len(conversation.messages)-1]["payload"]["data"].get("text", "")))
 
     except Exception:
         # Format the prompt
@@ -87,7 +87,7 @@ Previous Conversation:
 
 --------------------------------------
 Client:
-{conversation.messages[len(conversation.messages)-1]}
+{conversation.messages[len(conversation.messages)-1]["payload"]["data"].get("text", "")}
 
 Supplier: //Your Response as Supplier in friendly persian language
 ...
