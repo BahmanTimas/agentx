@@ -6,16 +6,18 @@ import logging
 
 def process_conversation_update(conversation: Conversation):
     prompt = generate_prompt(conversation)
-    logging.info(f"agentx prompt:\n{prompt}")
     completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
 
+    logging.info(f"agentx prompt:\n{prompt}")
     logging.info(f"user message:\n{conversation.messages[len(conversation.messages)-1]}")
     logging.info(f"agentx respond:\n{result}")
 
-    divar.send_message(
+    response = divar.send_message(
         conversation.post.divar_access_token.get("access_token"), conversation.divar_conversation_id, result
     )
+    logging.info(f"send message response:\n{response}")
+
     conversation.messages.append({
         "payload": {
             "sender": {
@@ -26,18 +28,19 @@ def process_conversation_update(conversation: Conversation):
             }
         }
     })
+    
     conversation.update_at = datetime.datetime.now()
     conversation.save()
-
-    prompt = generate_summary_prompt(conversation)
-    completion_result = openai.chat_completion(prompt)
 
     ChatCompletionHistory.objects.create(
         prompt=prompt,
         result=str(completion_result)
     )
 
+    prompt = generate_summary_prompt(conversation)
+    completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
+    
     conversation.status = result
 
     conversation.update_at = datetime.datetime.now()
