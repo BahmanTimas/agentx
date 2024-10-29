@@ -89,7 +89,7 @@ Previous Conversation:
 Client:
 {conversation.messages[len(conversation.messages)-1]["payload"]["data"].get("text", "")}
 
-Supplier: //Your Response as Supplier in friendly persian language
+Supplier: //Your Respond as Supplier in friendly Persian language and very short answers
 ...
 """
 
