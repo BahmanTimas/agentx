@@ -2,6 +2,7 @@ from backend.core.models import Conversation, Configuration, Configurations, Cha
 from backend.client import openai, divar
 import json
 import logging
+import datetime
 
 
 def process_conversation_update(conversation: Conversation):
