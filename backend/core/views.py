@@ -137,9 +137,9 @@ def oauth_callback(request):
     # TODO: do we need a middle page that notify the user we are processing the data needed?
 
     # TODO: response? save the response? error handling
-    if not post_detail:
+    if not post_detail.divar_on_message_setup:
         divar.setup_post_on_message_hook(divar_post_token, divar_access_token.get("access_token"))
-        post_detail = True
+        post_detail.divar_on_message_setup = True
         post_detail.save()
 
     return redirect(post_detail.divar_post_return_url)
