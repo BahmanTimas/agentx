@@ -41,16 +41,16 @@ def generate_prompt(conversation: Conversation) -> str:
     # Format the prompt
     prompt = f"""
 You are a chatbot assistant for a post on Divar.ir.
-Respond concisely based on the following post details and previous conversation only to the latest client message.
+Respond concisely based on the following post details and previous conversation.
 
 Post Details:
 {conversation.post.divar_post_data}
-Supply Instruction:
+More Post Info:
 {conversation.post.knowledge}
 Previous Conversation:
 {conversation_history}
 
-Response in friendly persian language to latest client message:
+Response as Supplier in friendly persian language:
 """
     return prompt.strip()
 

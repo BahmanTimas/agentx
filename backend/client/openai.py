@@ -12,6 +12,7 @@ RESPONSE_FORMAT_TEXT = {"type": "text"}
 
 MODEL_GPT_3_5_TURBO = "gpt-3.5-turbo"
 MODEL_GPT_4O_MINI = "gpt-4o-mini"
+MODEL_GPT_4O = "gpt-4o"
 
 
 """response object
@@ -44,7 +45,7 @@ ChatCompletion(
         prompt_tokens_details=None)
     )
 """
-def chat_completion(content: str, response_format=RESPONSE_FORMAT_TEXT, model=MODEL_GPT_4O_MINI):
+def chat_completion(content: str, response_format=RESPONSE_FORMAT_TEXT, model=MODEL_GPT_4O):
     return client.chat.completions.create(
         model=model,
         response_format=response_format,
