@@ -88,16 +88,8 @@ authorization: {{ identification_key }}
     
     conversation, created = Conversation.objects.get_or_create(
         post=post_detail,
-        divar_conversation_id=data.get("payload").get("id")
+        divar_conversation_id=data.get("payload").get("conversation_id")
     )
-
-    conversation = Conversation.objects.filter(divar_conversation_id=data.get("payload").get("id")).first()
-    if not conversation:
-        conversation = Conversation.objects.create(
-            post=post_detail,
-            divar_conversation_id=data.get("payload").get("id")
-        )
-
     conversation.messages.append(data)
     conversation.save()
 
