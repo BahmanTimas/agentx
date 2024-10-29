@@ -76,11 +76,6 @@ authorization: {{ identification_key }}
     data = json.loads(request.body.decode('utf-8'))
 
     logging.info(f"receive on message payload: {data}")
-
-    sender = data.get("payload").get("sender")
-    if sender.get("is_supply"):
-        # TODO: mark conversation to not respond automatically anymore (age taraf ba moshtari sohbat kone dg bot javab nade be payame moshtari)
-        return Response(status=200)
     
     divar_post_token = data.get("payload").get("metadata").get("post_token")
     
@@ -102,7 +97,11 @@ authorization: {{ identification_key }}
     #asyncio.create_task(process_conversation_update(conversation))
     #TODO: async it
 
-    process_conversation_update(conversation)
+    sender = data.get("payload").get("sender")
+    
+    if not sender.get("is_supply"):
+        # TODO: mark conversation to not respond automatically anymore (age taraf ba moshtari sohbat kone dg bot javab nade be payame moshtari)
+        process_conversation_update(conversation)
 
     return Response(status=200)
 
