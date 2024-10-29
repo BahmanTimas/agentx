@@ -52,11 +52,14 @@ Respond concisely based on the following post details and previous conversation.
 
 Post Details:
 {conversation.post.divar_post_data}
-More Post Info:
+
+--------------------------------------
+Secret knowledge (don't spoil them directly):
 {conversation.post.knowledge}
+
+--------------------------------------
 Previous Conversation:
 {conversation_history}
-
 Response as Supplier in friendly persian language:
 """
 
