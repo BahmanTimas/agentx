@@ -25,9 +25,9 @@ def app_start(request):
         divar_post_data = divar.get_post(divar_post_token)
 
         post_detail, created = PostDetail.objects.get_or_create(
-            divar_post_return_url=divar_post_return_url,
-            divar_post_token=divar_post_token,
+            divar_post_token=divar_post_token
         )
+        post_detail.divar_post_return_url=divar_post_return_url
         post_detail.divar_post_data = divar_post_data
         post_detail.knowledge=knowledge
         post_detail.save()
@@ -98,7 +98,7 @@ authorization: {{ identification_key }}
     #TODO: async it
 
     sender = data.get("payload").get("sender")
-    
+
     if not sender.get("is_supply"):
         # TODO: mark conversation to not respond automatically anymore (age taraf ba moshtari sohbat kone dg bot javab nade be payame moshtari)
         process_conversation_update(conversation)
