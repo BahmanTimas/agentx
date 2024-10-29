@@ -45,7 +45,7 @@ class Conversation(models.Model):
     status = models.TextField(null=True, blank=True)
 
 
-class ChatCompletionHistory(models.Model):
+class ChatCompletionHistory(models.Model):  #TODO: change history to detail
     create_at = models.DateTimeField(auto_now_add=True)
     prompt = models.TextField(null=False, blank=False)
     result =  models.TextField(null=False, blank=False)
