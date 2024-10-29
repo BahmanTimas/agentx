@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import json
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from rest_framework.response import Response
 from django.shortcuts import render
 from backend.client import divar
@@ -56,7 +56,7 @@ def chat_start(request):
 
     print(request.POST)  #{"callback_url":"https://open-platform-redirect.divar.ir/completion","post_token":"post-token","user_id":"demand_id","peer_id":"supplier_id","supplier":{"id":"supplier_id"},"demand":{"id":"demand_id"}}
     
-    return Response(request.POST.get("callback_url", "https://agentx.darkube.app/app_start?source=chat_start"))
+    return HttpResponse(request.POST.get("callback_url", "https://agentx.darkube.app/app_start?source=chat_start"))
 
 
 @api_view(["POST"])
