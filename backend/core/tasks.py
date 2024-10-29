@@ -26,6 +26,8 @@ def process_conversation_update(conversation: Conversation):
             }
         }
     })
+    conversation.update_at = datetime.datetime.now()
+    conversation.save()
 
     prompt = generate_summary_prompt(conversation)
     completion_result = openai.chat_completion(prompt)
