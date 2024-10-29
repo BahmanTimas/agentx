@@ -43,3 +43,9 @@ class Conversation(models.Model):
     post = models.ForeignKey(PostDetail, on_delete=models.PROTECT, null=False, blank=False)
     messages = models.JSONField(null=False, blank=False, default=list)
     status = models.TextField(null=True, blank=True)
+
+
+class ChatCompletionHistory(models.Model):
+    create_at = models.DateTimeField(auto_now_add=True)
+    prompt = models.TextField(null=False, blank=False)
+    result =  models.TextField(null=False, blank=False)

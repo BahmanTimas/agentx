@@ -1,4 +1,4 @@
-from backend.core.models import Conversation, Configuration, Configurations
+from backend.core.models import Conversation, Configuration, Configurations, ChatCompletionHistory
 from backend.client import openai, divar
 import json
 import logging
@@ -19,6 +19,12 @@ def process_conversation_update(conversation: Conversation):
 
     prompt = generate_summary_prompt(conversation)
     completion_result = openai.chat_completion(prompt)
+    
+    ChatCompletionHistory.objects.create(
+        prompt=prompt,
+        result=str(completion_result)
+    )
+
     result = completion_result.choices[0].message.content
     conversation.status = result
     conversation.update_at = datetime.datetime.now()
