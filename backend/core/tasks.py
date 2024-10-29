@@ -108,6 +108,6 @@ Highlight any important parts relevant to price, product condition, availability
 Conversation:
 {conversation_content}
 
-Summary:
+Summary in persian language and very short:
 """
     return prompt.strip()
