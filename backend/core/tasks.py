@@ -1,4 +1,4 @@
-from backend.core.models import Conversation
+from backend.core.models import Conversation, Configuration, Configurations
 from backend.client import openai, divar
 import json
 import logging
@@ -38,8 +38,15 @@ def generate_prompt(conversation: Conversation) -> str:
         text = message["payload"]["data"].get("text", "")
         conversation_history += f"{sender}: {text}\n"
 
-    # Format the prompt
-    prompt = f"""
+    try:
+        prompt_template = Configuration.get_value(Configurations.POST_CONVERSATION_RESPOND_PROMPT)
+        prompt = (prompt_template.replace("{conversation.post.divar_post_data}", conversation.post.divar_post_data)
+                  .replace("{conversation.post.knowledge}", conversation.post.knowledge)
+                  .replace("{conversation_history}", conversation_history))
+
+    except Exception:
+        # Format the prompt
+        prompt = f"""
 You are a chatbot assistant for a post on Divar.ir.
 Respond concisely based on the following post details and previous conversation.
 
@@ -52,6 +59,7 @@ Previous Conversation:
 
 Response as Supplier in friendly persian language:
 """
+
     return prompt.strip()
 
 

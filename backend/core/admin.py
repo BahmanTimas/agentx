@@ -1,3 +1,5 @@
 from django.contrib import admin
+from backend.core.models import PostDetail, Conversation
 
-# Register your models here.
+admin.site.register(PostDetail)
+admin.site.register(Conversation)
