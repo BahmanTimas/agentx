@@ -9,7 +9,7 @@ def process_conversation_update(conversation: Conversation):
     prompt = generate_prompt(conversation)
     completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
-
+    result = result.replace("Supplier:", "").replace("supplier:", "").replace("Supply:", "").replace("supply:", "")
     logging.info(f"agentx prompt:\n{prompt}")
     logging.info(f"user message:\n{conversation.messages[len(conversation.messages)-1]}")
     logging.info(f"agentx respond:\n{result}")
