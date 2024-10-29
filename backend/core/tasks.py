@@ -65,7 +65,8 @@ def generate_prompt(conversation: Conversation) -> str:
         prompt_template = Configuration.get_value(Configurations.POST_CONVERSATION_RESPOND_PROMPT)
         prompt = (prompt_template.replace("{conversation.post.divar_post_data}", conversation.post.divar_post_data)
                   .replace("{conversation.post.knowledge}", conversation.post.knowledge)
-                  .replace("{conversation_history}", conversation_history))
+                  .replace("{conversation_history}", conversation_history)
+                  .replace("{client_message}", conversation.messages[len(conversation.messages)-1]))
 
     except Exception:
         # Format the prompt
@@ -83,14 +84,20 @@ Secret knowledge (never spoil directly):
 --------------------------------------
 Previous Conversation:
 {conversation_history}
-Response as Supplier in friendly persian language:
+
+--------------------------------------
+Client:
+{conversation.messages[len(conversation.messages)-1]}
+
+Supplier: //Your Response as Supplier in friendly persian language
+...
 """
 
     return prompt.strip()
 
 
 def generate_summary_prompt(conversation: Conversation) -> str:
-    previous_messages = conversation.messages
+    previous_messages = conversation.messages[:-1]
 
     # Prepare conversation content for summary
     conversation_content = ""
