@@ -52,7 +52,7 @@ def process_conversation_update(conversation: Conversation):
 
 
 def generate_prompt(conversation: Conversation) -> str:
-    previous_messages = conversation.messages
+    previous_messages = conversation.messages[:-1]
 
     # Prepare previous conversation messages
     conversation_history = ""
