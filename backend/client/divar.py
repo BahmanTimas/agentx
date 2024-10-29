@@ -1,6 +1,7 @@
 import requests
 import uuid
 from django.conf import settings
+import logging
 
 
 def create_oauth_init_url(post_token, scope):
@@ -34,7 +35,7 @@ def get_access_token(code):
     if response.status_code == 200:
         return response.json()
     else:
-        print(response.json())
+        logging.info(response.json())
         response.raise_for_status()
 
 
@@ -95,7 +96,7 @@ def send_message(oauth_access_token, conversation_id, message):
                    " ".join([f"-H '{key}: {value}'" for key, value in headers.items()]) + \
                    f" -d '{json.dumps(payload)}'"
 
-    print("cURL command:", curl_command)  # Print the curl command for debugging
+    logging.info("cURL command:", curl_command)  # Print the curl command for debugging
 
     response = requests.post(url, json=payload, headers=headers)
     

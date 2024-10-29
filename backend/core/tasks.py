@@ -1,16 +1,17 @@
 from backend.core.models import Conversation
 from backend.client import openai, divar
 import json
+import logging
 
 
 def process_conversation_update(conversation: Conversation):
     prompt = generate_prompt(conversation)
-    print(f"agentx prompt:\n{prompt}")
+    logging.info(f"agentx prompt:\n{prompt}")
     completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
 
-    print(f"user message:\n{conversation.messages[len(conversation.messages)-1]}")
-    print(f"agentx respond:\n{result}")
+    logging.info(f"user message:\n{conversation.messages[len(conversation.messages)-1]}")
+    logging.info(f"agentx respond:\n{result}")
 
     divar.send_message(
         conversation.post.divar_access_token.get("access_token"), conversation.divar_conversation_id, result

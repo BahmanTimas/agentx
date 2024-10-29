@@ -8,6 +8,7 @@ from backend.client import divar
 from backend.core.models import PostDetail, Conversation
 import asyncio
 from backend.core.tasks import process_conversation_update
+import logging
 
 
 @api_view(["GET", "POST"])
@@ -54,7 +55,7 @@ def chat_start(request):
 
     # chi bebine? bere OAuth2? ke beshe chat kone?
 
-    #print(request.POST)  #{"callback_url":"https://open-platform-redirect.divar.ir/completion","post_token":"post-token","user_id":"demand_id","peer_id":"supplier_id","supplier":{"id":"supplier_id"},"demand":{"id":"demand_id"}}
+    #logging.info(request.POST)  #{"callback_url":"https://open-platform-redirect.divar.ir/completion","post_token":"post-token","user_id":"demand_id","peer_id":"supplier_id","supplier":{"id":"supplier_id"},"demand":{"id":"demand_id"}}
     
     return HttpResponse("https://agentx.darkube.app/app_start?source=chat_start")
 
@@ -70,11 +71,11 @@ authorization: {{ identification_key }}
 {'payload': {'@type': 'type.googleapis.com/notify.ChatMessagePayload', 'data': {'@type': 'type.googleapis.com/notify.ChatMessageTextData', 'text': 'سلام'}, 'from': None, 'id': 'd8e03e89-952d-11ef-9e44-0629b783fb1b', 'metadata': {'category': 'craftsmen', 'post_token': 'wZecbxRh', 'title': 'لوله\u200cکش گران'}, 'receiver': {'id': '69c9281d-4540-4073-b0a0-ef2e8a05948f', 'is_supply': True}, 'sender': {'id': 'b1abebff-e10a-4ac0-aeee-6dbaa630088c', 'is_supply': False}, 'sent_at': '1730120961634000', 'to': None, 'type': 'TEXT'}, 'timestamp': '1730120961', 'type': 'CHAT_MESSAGE'}
     """
 
-    print("Response Headers:", request.headers)
+    logging.info("Response Headers:", request.headers)
 
     data = json.loads(request.body.decode('utf-8'))
 
-    print(f"receive on message payload: {data}")
+    logging.info(f"receive on message payload: {data}")
 
     sender = data.get("payload").get("sender")
     if sender.get("is_supply"):
@@ -118,8 +119,8 @@ authorization: {{ identification_key }}
 def oauth_callback(request):
 
     if request.GET.get("error"): # TODO
-        print(request.GET.get("error"))
-        print(request.GET.get("error_description"))
+        logging.info(request.GET.get("error"))
+        logging.info(request.GET.get("error_description"))
         return redirect("https://error.com")
 
     # scope = request.GET.get("scope")
