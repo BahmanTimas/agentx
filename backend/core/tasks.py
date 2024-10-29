@@ -54,7 +54,7 @@ Post Details:
 {conversation.post.divar_post_data}
 
 --------------------------------------
-Secret knowledge (don't spoil them directly):
+Secret knowledge (never spoil directly):
 {conversation.post.knowledge}
 
 --------------------------------------
