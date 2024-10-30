@@ -21,6 +21,9 @@
         padding: 2rem;
         direction: rtl;
       }
+      .color-primary {
+        color: #ce1b22 !important;
+      }
       .container {
         max-width: 600px;
         background: white;
@@ -37,6 +40,12 @@
         border-bottom: 2px solid rgb(179, 179, 179);
         padding-bottom: 0.5rem;
         margin-bottom: 1rem;
+      }
+      .divder {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid rgb(179, 179, 179);
+        padding-bottom: 0.5rem;
       }
       .header {
         display: flex;
@@ -156,6 +165,135 @@
         background-color: #7170700f;
         border: 2px solid #000000;
       }
+      .select-box-container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        max-width: 300px;
+        margin-top: 0.5rem;
+      }
+
+      .select-box {
+        appearance: none;
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #606060;
+        background-color: #fff;
+        font-family: "Vazir", Arial, sans-serif;
+        cursor: pointer;
+        /* transition: all 0.3s ease; */
+      }
+
+      .select-box:focus {
+        outline: none;
+        outline: 2px solid #00b959;
+        /* border-width: 2px;
+        border-color: #00b959; */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .select-box-container::after {
+        content: "▼";
+        font-size: 0.9rem;
+        color: #b1161b;
+        position: absolute;
+        top: 30%;
+        left: 1rem;
+        transform: translateY(-50%);
+        transform: scaleY(0.8);
+        pointer-events: none;
+      }
+
+      .help-description {
+        font-size: 0.9rem;
+        color: #777;
+
+        margin-top: 0.5rem;
+        line-height: 1.4;
+        text-align: right;
+      }
+      .form-group {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: end;
+      }
+      /* Container styling */
+      .chat-cards-container {
+        margin-top: 2rem;
+        width: 95%;
+        max-width: 700px;
+        padding: 0 1rem;
+      }
+
+      /* Chat card styling */
+      .chat-card {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .chat-card:hover {
+        cursor: pointer;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Title and paragraph styling */
+      .chat-card h4 {
+        font-size: 1.1rem;
+        color: #ce1b22;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .chat-card p {
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0.3rem 0;
+      }
+
+      /* Individual section styling */
+      .conversation-summary,
+      .ad-status,
+      .customer-info {
+        margin-bottom: 1rem;
+        padding: 0.5rem 0;
+        border-top: 1px solid #f0f0f0;
+      }
+      .customer-info {
+        background-color: #b1161b0b;
+        border-radius: 8px;
+      }
+      .customer-info p {
+        color: #ce1b22;
+        font-weight: 500;
+        font-size: large;
+        margin: 0;
+      }
+
+      .conversation-summary:first-child,
+      .ad-status:first-child,
+      .customer-info:first-child {
+        border-top: none;
+      }
+
+      /* Responsive design */
+      @media (max-width: 600px) {
+        .chat-card {
+          padding: 1rem;
+        }
+      }
+
       @media (max-width: 600px) {
         body {
           padding: 1rem;
@@ -211,45 +349,155 @@
           />
         </div>
       </div>
-      <div class="description">
-        ایجنت ایکس یک دستیار هوشمند چت و مذاکره است که به طور خودکار با مشتری‌ها
-        گفتگو می‌کند و بر اساس اطلاعات آگهی و دستورالعمل‌های فروشنده، پاسخ‌های
-        هوشمند ارائه می‌دهد. <br />
-        در صورت مثبت بودن روند مذاکره، به فروشنده اطلاع می‌دهد تا فرآیند فروش
-        ساده‌تر و سریع‌تر انجام شود.
-      </div>
+      {% if is_default %}
+      <!-- Default Page Content -->
+      <div>
+        <div class="description">
+          ایجنت ایکس یک دستیار هوشمند چت و مذاکره است که به طور خودکار با
+          مشتری‌ها گفتگو می‌کند و بر اساس اطلاعات آگهی و دستورالعمل‌های فروشنده،
+          پاسخ‌های هوشمند ارائه می‌دهد. <br />
+          در صورت مثبت بودن روند مذاکره، به فروشنده اطلاع می‌دهد تا فرآیند فروش
+          ساده‌تر و سریع‌تر انجام شود.
+        </div>
 
-      <form
-        class="form"
-        method="POST"
-        action="{% url 'app-start' %}?{{ request.GET.urlencode }}"
-      >
-        {% csrf_token %}
-        <div class="text-area-container">
-          <textarea
-            name="knowledge"
-            class="text-area"
-            placeholder="اطلاعات مربوط به پست و هر گونه دستورالعمل برای پاسخ‌گویی موثرتر را وارد کنید..."
-          ></textarea>
-          <div class="coming-soon-btns">
-            <div class="coming-soon-btn">
-              <img src="{% static 'mic.png' %}" alt="attach-file" width="25" />
-            </div>
-            <div class="coming-soon-btn">
-              <img
-                class="coming-soon-btn"
-                src="{% static 'file.png' %}"
-                alt="attach-file"
-                width="25"
-              />
+        <form
+          class="form"
+          method="POST"
+          action="{% url 'app-start' %}?{{ request.GET.urlencode }}"
+        >
+          {% csrf_token %}
+          <div class="text-area-container">
+            <textarea
+              name="knowledge"
+              class="text-area"
+              placeholder="اطلاعات مربوط به پست و هر گونه دستورالعمل برای پاسخ‌گویی موثرتر را وارد کنید..."
+            ></textarea>
+            <div class="coming-soon-btns">
+              <div class="coming-soon-btn">
+                <img
+                  src="{% static 'mic.png' %}"
+                  alt="attach-file"
+                  width="25"
+                />
+              </div>
+              <div class="coming-soon-btn">
+                <img
+                  class="coming-soon-btn"
+                  src="{% static 'file.png' %}"
+                  alt="attach-file"
+                  width="25"
+                />
+              </div>
             </div>
           </div>
+          <div class="button-container">
+            <button type="submit" class="action-button">
+              فعال‌سازی افزونه
+            </button>
+            <button type="button" class="cancel-button">لغو</button>
+          </div>
+        </form>
+      </div>
+      {% else %}
+      <!-- Page2 Content -->
+      <div class="">
+        <div class="description">
+          ایجنت ایکس یک دستیار هوشمند چت و مذاکره است که به طور خودکار با
+          مشتری‌ها گفتگو می‌کند و بر اساس اطلاعات آگهی و دستورالعمل‌های فروشنده،
+          پاسخ‌های هوشمند ارائه می‌دهد.
         </div>
-        <div class="button-container">
-          <button type="submit" class="action-button">فعال‌سازی افزونه</button>
-          <button type="button" class="cancel-button">لغو</button>
+        <form
+          class="form"
+          method="POST"
+          action="{% url 'app-start' %}?{{ request.GET.urlencode }}"
+        >
+          {% csrf_token %}
+          <div class="text-area-container">
+            <textarea
+              name="knowledge"
+              class="text-area"
+              placeholder="اطلاعات مربوط به پست و هر گونه دستورالعمل برای پاسخ‌گویی موثرتر را وارد کنید..."
+            ></textarea>
+            <div class="coming-soon-btns">
+              <div class="coming-soon-btn">
+                <img
+                  src="{% static 'mic.png' %}"
+                  alt="attach-file"
+                  width="25"
+                />
+              </div>
+              <div class="coming-soon-btn">
+                <img
+                  class="coming-soon-btn"
+                  src="{% static 'file.png' %}"
+                  alt="attach-file"
+                  width="25"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="button-container">
+            <button type="submit" class="action-button">اعمال تغییرات</button>
+            <button type="button" class="cancel-button">لغو</button>
+          </div> -->
+        </form>
+
+        <form class="form">
+          <div class="form-group">
+            <label for="notification-method">نحوه اطلاع رسانی:</label>
+            <div class="select-box-container">
+              <select
+                id="notification-method"
+                name="notification-method"
+                class="select-box"
+              >
+                <option value="sms">پیامک</option>
+                <option value="email">ایمیل</option>
+              </select>
+            </div>
+            <p class="help-description">
+              روش اطلاع‌رسانی برای اطلاع شما از نتیجه مذاکره را انتخاب کنید.
+            </p>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" class="action-button">ذخیره تنظیمات</button>
+            <button type="button" class="cancel-button">لغو</button>
+          </div>
+        </form>
+        <div class="chat-cards-container">
+          <h3 class="color-primary" style="font-weight: 600; margin-bottom: 0">
+            لیست مذاکره ها
+          </h3>
+          <div class="divder"></div>
+          {% for card in chat_cards %}
+          <div class="chat-card">
+            <!-- Customer Information -->
+            <div class="customer-info">
+              {% if card.customer_name %}
+              <p>{{ card.customer_name }}</p>
+              {% else %}
+              <p>{{ card.customer_number }}</p>
+              {% endif %}
+            </div>
+            <!-- Summary of the Conversation -->
+            <div class="conversation-summary">
+              <h4 style="margin: 5px 0">خلاصه مذاکره</h4>
+              <p>{{ card.conversation_summary }}</p>
+            </div>
+
+            <!-- Ad Status -->
+            <div class="ad-status">
+              <h4 style="margin: 5px 0">وضعیت آگهی</h4>
+              <p>{{ card.ad_status }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <p style="color: #555">هیچ مذاکره‌ای موجود نیست.</p>
+          {% endfor %}
         </div>
-      </form>
+      </div>
+      {% endif %}
     </div>
   </body>
 </html>
