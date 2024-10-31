@@ -29,7 +29,6 @@ def process_conversation_update(conversation: Conversation):
             }
         }
     })
-    
     conversation.update_at = datetime.datetime.now()
     conversation.save()
 
@@ -38,14 +37,21 @@ def process_conversation_update(conversation: Conversation):
         result=str(completion_result)
     )
 
+
     prompt = generate_summary_prompt(conversation)
     completion_result = openai.chat_completion(prompt)
     result = completion_result.choices[0].message.content
-    
     conversation.status = result
-
     conversation.update_at = datetime.datetime.now()
     conversation.save()
+
+
+    prompt = generate_post_status_prompt(conversation)
+    completion_result = openai.chat_completion(prompt)
+    result = completion_result.choices[0].message.content
+    conversation.post.status = result
+    conversation.post.update_at = datetime.datetime.now()
+    conversation.post.save()
 
     # TODO: do we need tosave our response message too (use divar api) or it will be send to webhook?
     # TODO: do we need to update the post status based on all it's conversation status?
@@ -116,5 +122,23 @@ Conversation:
 {conversation_content}
 
 Summary in persian language and very short:
+"""
+    return prompt.strip()
+
+
+def generate_post_status_prompt(conversation: Conversation) -> str:
+    conversations = conversation.post.conversation_set.all()
+
+    conversations_summary = [ f"- {conversation.status}\n" for conversation in conversations]
+
+    prompt = f"""
+You are an assistant summarizing all conversations summary of a post in a Divar.ir chat. 
+Analyze the messages below and generate a summary focusing on key points, inquiries, and responses. 
+Highlight any important parts relevant to price, product condition, availability, or other notable information.
+
+Conversations Summary:
+{conversations_summary}
+
+Post Summary in persian language and very short:
 """
     return prompt.strip()

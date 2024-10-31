@@ -34,6 +34,7 @@ class PostDetail(models.Model):
     divar_access_token = models.JSONField(null=True, blank=True, default=dict)
     divar_on_message_setup = models.BooleanField(null=False, blank=False, default=False)
     knowledge = models.TextField(null=True, blank=True)
+    status = models.TextField(null=True, blank=True)
 
 
 class Conversation(models.Model):
