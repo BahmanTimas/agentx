@@ -40,11 +40,32 @@ def app_start(request):
         return redirect(oauth_grant_url)
 
     # TODO: check params?
-    # post_token = request.GET.get("post_token")
     # return_url = request.GET.get("return_url")
 
+    divar_post_token = request.GET.get("post_token")
+    post_detail = PostDetail.objects.filter(divar_post_token=divar_post_token).first()
+
     # Show enable agent-x for post view
-    return render(request, 'appstart.html')
+    context = { 'activated': False }
+
+    if post_detail:
+        conversations = post_detail.conversation_set.all()
+        conversations_summary = [{
+            'id': conversation.id,
+            'status': conversation.status,
+        } for conversation in conversations]
+
+        context = {
+            'activated': bool(post_detail) and bool(post_detail.divar_access_token) and bool(post_detail.divar_on_message_setup),
+            'knowledge': '',
+            'private_knowledge': True,
+            'tone': 'frieldly',
+            'conversations': conversations_summary,
+            'post_status': '',
+            'answers_count': 32 # we need to store this data each time we use divar send_message
+        }
+
+    return render(request, 'appstart.html', context=context)
 
 
 @api_view(["POST"]) #nemikhaim?

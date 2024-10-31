@@ -264,7 +264,7 @@
 
       /* Individual section styling */
       .conversation-summary,
-      .ad-status,
+      .post-status,
       .customer-info {
         margin-bottom: 1rem;
         padding: 0.5rem 0;
@@ -282,7 +282,7 @@
       }
 
       .conversation-summary:first-child,
-      .ad-status:first-child,
+      .post-status:first-child,
       .customer-info:first-child {
         border-top: none;
       }
@@ -349,7 +349,7 @@
           />
         </div>
       </div>
-      {% if is_default %}
+      {% if activated is False %}
       <!-- Default Page Content -->
       <div>
         <div class="description">
@@ -436,10 +436,10 @@
               </div>
             </div>
           </div>
-          <!-- <div class="button-container">
+          <div class="button-container">
             <button type="submit" class="action-button">اعمال تغییرات</button>
             <button type="button" class="cancel-button">لغو</button>
-          </div> -->
+          </div>
         </form>
 
         <form class="form">
@@ -470,31 +470,34 @@
             لیست مذاکره ها
           </h3>
           <div class="divder"></div>
-          {% for card in chat_cards %}
+          {% for conversation in conversations %}
           <div class="chat-card">
             <!-- Customer Information -->
             <div class="customer-info">
-              {% if card.customer_name %}
-              <p>{{ card.customer_name }}</p>
+              {% if conversation.customer_name %}
+              <p>{{ conversation.customer_name }}</p>
               {% else %}
-              <p>{{ card.customer_number }}</p>
+              <p>{{ conversation.id }}</p>
               {% endif %}
             </div>
             <!-- Summary of the Conversation -->
             <div class="conversation-summary">
               <h4 style="margin: 5px 0">خلاصه مذاکره</h4>
-              <p>{{ card.conversation_summary }}</p>
-            </div>
-
-            <!-- Ad Status -->
-            <div class="ad-status">
-              <h4 style="margin: 5px 0">وضعیت آگهی</h4>
-              <p>{{ card.ad_status }}</p>
+              <p>{{ conversation.status }}</p>
             </div>
           </div>
           {% empty %}
           <p style="color: #555">هیچ مذاکره‌ای موجود نیست.</p>
           {% endfor %}
+        </div>
+        <!-- Post Status Fixme -->
+        <div class="post-status">
+            <h4 style="margin: 5px 0">وضعیت آگهی</h4>
+            {% if post_status %}
+            <p>{{ post_status }}</p>
+            {% else %}
+            <p style="color: #555">وضعیت موجود نیست.</p>
+            {% endif %}
         </div>
       </div>
       {% endif %}
