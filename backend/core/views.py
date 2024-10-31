@@ -32,12 +32,13 @@ def app_start(request):
         post_detail.knowledge=knowledge
         post_detail.save()
 
-        oauth_grant_url = divar.create_oauth_init_url(
-            post_token=divar_post_token,
-            scope=f'CHAT_POST_CONVERSATIONS_READ.{divar_post_token}+CHAT_POST_CONVERSATIONS_MESSAGE_SEND.{divar_post_token}'
-        )
-
-        return redirect(oauth_grant_url)
+        if not post_detail.divar_access_token:  # TODO: check for expire too
+            oauth_grant_url = divar.create_oauth_init_url(
+                post_token=divar_post_token,
+                scope=f'CHAT_POST_CONVERSATIONS_READ.{divar_post_token}+CHAT_POST_CONVERSATIONS_MESSAGE_SEND.{divar_post_token}'
+            )
+            return redirect(oauth_grant_url)
+        else return render(request, 'appstart.html', context=get_appstart_context(post_detail))
 
     # TODO: check params?
     # return_url = request.GET.get("return_url")
@@ -45,9 +46,10 @@ def app_start(request):
     divar_post_token = request.GET.get("post_token")
     post_detail = PostDetail.objects.filter(divar_post_token=divar_post_token).first()
 
-    # Show enable agent-x for post view
-    context = { 'activated': False }
+    return render(request, 'appstart.html', context=get_appstart_context(post_detail))
 
+
+def get_appstart_context(post_detail: PostDetail):
     if post_detail:
         conversations = post_detail.conversation_set.all()
         conversations_summary = [{
@@ -55,7 +57,7 @@ def app_start(request):
             'status': conversation.status,
         } for conversation in conversations]
 
-        context = {
+        return {
             'activated': bool(post_detail) and bool(post_detail.divar_access_token) and bool(post_detail.divar_on_message_setup),
             'knowledge': '',
             'private_knowledge': True,
@@ -65,8 +67,7 @@ def app_start(request):
             'answers_count': 32 # we need to store this data each time we use divar send_message
         }
 
-    return render(request, 'appstart.html', context=context)
-
+    return { 'activated': False }
 
 @api_view(["POST"]) #nemikhaim?
 # @authentication_classes([JWTStatelessUserAuthentication])
