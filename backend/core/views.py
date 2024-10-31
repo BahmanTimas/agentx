@@ -12,6 +12,11 @@ import logging
 
 
 @api_view(["GET", "POST"])
+def landing(request):
+    return render(request, 'landing.html')
+
+
+@api_view(["GET", "POST"])
 # @authentication_classes([JWTStatelessUserAuthentication])
 # @permission_classes([IsAuthenticated])
 def app_start(request):
