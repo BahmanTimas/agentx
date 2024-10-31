@@ -38,7 +38,7 @@ def app_start(request):
                 scope=f'CHAT_POST_CONVERSATIONS_READ.{divar_post_token}+CHAT_POST_CONVERSATIONS_MESSAGE_SEND.{divar_post_token}'
             )
             return redirect(oauth_grant_url)
-        else return render(request, 'appstart.html', context=get_appstart_context(post_detail))
+        else: return render(request, 'appstart.html', context=get_appstart_context(post_detail))
 
     # TODO: check params?
     # return_url = request.GET.get("return_url")
