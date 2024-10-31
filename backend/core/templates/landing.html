@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgentX - افزونه دستیار هوشمند کنار دیوار</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>دستیار هوشمند Agent-X</title>
+
+    <meta
+      name="description"
+      content="دستیار مذاکره هوشمند برای فروشندگان دیوار"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      body {
+        font-family: "Vazir", Arial, sans-serif;
+        direction: rtl;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+
+      /* Hero Section */
+      .hero {
+        background-color: #ce1b22;
+        color: #fff;
+        text-align: center;
+        padding: 3rem;
+        position: relative;
+      }
+      .hero-logo {
+        background-color: #fff;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        width: 80px;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .hero p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .cta-button {
+        background-color: #fff;
+        color: #ce1b22;
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .cta-button:hover {
+        background-color: #faeef0;
+      }
+
+      /* Introduction Section */
+      .introduction {
+        padding: 3rem;
+        text-align: center;
+        background-color: #fff;
+      }
+      .introduction h2 {
+        font-size: 2rem;
+        color: #ce1b22;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 3rem;
+        background-color: #f9f9f9;
+        text-align: center;
+      }
+      .features h2 {
+        font-size: 2rem;
+        color: #ce1b22;
+        margin-bottom: 2rem;
+      }
+      .feature-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .feature-card {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        padding-top: 3rem !important;
+        width: 250px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      .feature-card:hover {
+        box-shadow: 0px 4px 12px rgba(206, 27, 34, 0.5);
+      }
+      .feature-card img {
+        width: 50px;
+        margin-bottom: 1rem;
+      }
+      .feature-card p {
+        font-size: 1.1rem;
+        color: #333;
+      }
+
+      /* Pricing Section */
+      .pricing {
+        padding: 3rem;
+        background-color: #fff;
+        text-align: center;
+      }
+      .pricing h2 {
+        font-size: 2rem;
+        color: #ce1b22;
+        margin-bottom: 2rem;
+      }
+      .pricing-content {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      .plan {
+        background-color: #fff;
+        border: #ce1b22 2px solid;
+        border-radius: 10px;
+        padding: 2rem;
+        width: 280px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      .plan:hover {
+        box-shadow: 0px 4px 12px rgba(206, 27, 34, 0.5);
+      }
+      .plan h3 {
+        color: #ce1b22;
+        margin-bottom: 1rem;
+      }
+      .plan span {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: #555;
+      }
+      .plan .cta-button {
+        margin-top: 1rem !important;
+        background-color: #faeef0;
+        color: #ce1b22;
+      }
+
+      /* Footer Section */
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+      }
+      .footer-content .socials a {
+        color: #ce1b22;
+        margin: 0 1rem;
+        text-decoration: none;
+      }
+      .footer-content .socials a:hover {
+        color: #f11e25;
+      }
+      .footer-copyright {
+        font-size: 0.7rem;
+        color: #aaa;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <img
+        src="{% static 'AgentXLogo.svg' %}"
+        alt="AgentX Logo"
+        class="hero-logo"
+      />
+      <h1>ایجنت ایکس، دستیار هوشمند کنار دیوار</h1>
+      <p>دستیار مذاکره هوشمند برای فروشندگان دیوار</p>
+      <a href="#features" class="cta-button">دیدن ویژگی ها</a>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="introduction">
+      <h2>AgentX چیست؟</h2>
+      <p>
+        با ایجنت ایکس، به سادگی افزونه‌ای را فعال کنید که ارتباط شما با خریداران
+        را بهبود می‌بخشد. پاسخ‌های هوشمند، تخفیف‌های خودکار و بیشتر در اختیار
+        شما قرار می‌گیرد.
+      </p>
+      <img src="intro-image.gif" alt="AgentX Introduction" />
+    </section>
+
+    <!DOCTYPE html>
+    <html lang="fa">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AgentX - Features</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/font-awesome@6.0.0-beta3/css/all.min.css"
+        />
+        <style>
+          body {
+            font-family: "Vazir", Arial, sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+          }
+
+          .features {
+            padding: 3rem;
+            background-color: #f9f9f9;
+            text-align: center;
+          }
+
+          .features h2 {
+            font-size: 2rem;
+            color: #ce1b22;
+            margin-bottom: 2rem;
+          }
+
+          .feature-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+          }
+
+          .feature-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+          }
+
+          .feature-card:hover {
+            box-shadow: 0px 4px 12px rgba(206, 27, 34, 0.5);
+          }
+
+          .feature-card i {
+            font-size: 2rem;
+            color: #ce1b22;
+            margin-bottom: 1rem;
+          }
+
+          .feature-card p {
+            font-size: 1.1rem;
+            color: #333;
+          }
+        </style>
+      </head>
+      <body>
+        <!-- Features Section -->
+        <section class="features" id="features">
+          <h2>امکانات AgentX</h2>
+          <div class="feature-cards">
+            <div class="feature-card">
+              <i class="fas fa-file-alt"></i>
+              <p>افزودن اطلاعات اضافه مثل متن، ویس و فایل</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-user-secret"></i>
+              <p>مشخص کردن اطلاعات به عنوان اطلاعات محرمانه</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-comments"></i>
+              <p>خلاصه‌ای از مکالمات مرتبط</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-info-circle"></i>
+              <p>نمایش وضعیت آگهی</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-bell"></i>
+              <p>اطلاع‌رسانی در لحظات مهم مذاکره</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-clipboard-list"></i>
+              <p>استفاده از آگهی‌های مشابه برای پاسخ</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-headset"></i>
+              <p>تعیین لحن و لحجه پشتیبان</p>
+            </div>
+          </div>
+        </section>
+      </body>
+    </html>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+      <h2>قیمت</h2>
+      <div class="pricing-content">
+        <div class="plan">
+          <h3>Pay as you go</h3>
+          <p>فعال‌سازی رایگان بر روی همه آگهی‌ها و پرداخت فقط در صورت مکالمه</p>
+          <span>۲۰۰ پیام رایگان</span>
+          <a href="#" class="cta-button">شروع کنید</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-content">
+        <p>ایجنت ایکس - کنار دیوار</p>
+        <div class="socials">
+          <a href="https://x.com/IrAgentxIr">توییتر</a>
+          <a href="#">تلگرام</a>
+          <a href="https://www.linkedin.com/in/agentx-ir-94626a334/">لینکدین</a>
+        </div>
+        <div class="footer-copyright">
+          &copy; ۲۰۲۳ AgentX. تمامی حقوق محفوظ است.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
