@@ -534,6 +534,15 @@
 
         <!-- Content for "لیست مذاکره ها" Tab -->
         <div id="chat-list" class="tab-content active">
+          <!-- Post Status Fixme -->
+          <div class="post-status">
+            <h4 style="margin: 5px 0">وضعیت آگهی</h4>
+            {% if post_status %}
+            <p>{{ post_status }}</p>
+            {% else %}
+            <p style="color: #555">وضعیت موجود نیست.</p>
+            {% endif %}
+          </div>
           <div class="chat-cards-container">
             {% for conversation in conversations %}
             <div class="chat-card">
@@ -555,15 +564,7 @@
             <p style="color: #555">هیچ مذاکره‌ای موجود نیست.</p>
             {% endfor %}
           </div>
-          <!-- Post Status Fixme -->
-          <div class="post-status">
-            <h4 style="margin: 5px 0">وضعیت آگهی</h4>
-            {% if post_status %}
-            <p>{{ post_status }}</p>
-            {% else %}
-            <p style="color: #555">وضعیت موجود نیست.</p>
-            {% endif %}
-          </div>
+
         </div>
       </div>
       {% endif %}
