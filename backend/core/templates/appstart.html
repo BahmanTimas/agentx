@@ -338,16 +338,18 @@
     <div class="container">
       <div class="header-div">
         <h3 class="header3">افزونه مذاکره هوشمند برای فروشندگان دیوار</h3>
-        <div class="header">
-          <p>AGENT<span>x</span></p>
-          {% load static %}
-          <img
-            width="30"
-            height="30"
-            src="{% static 'AgentXLogo.svg' %}"
-            alt="logo"
-          />
-        </div>
+        <a href="https://agentx.darkube.app/" target="_blank">
+          <div class="header">
+            <p>AGENT<span>x</span></p>
+            {% load static %}
+            <img
+              width="30"
+              height="30"
+              src="{% static 'AgentXLogo.svg' %}"
+              alt="logo"
+            />
+          </div>
+      </a>
       </div>
       {% if activated is False %}
       <!-- Default Page Content -->
