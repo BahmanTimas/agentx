@@ -64,11 +64,11 @@ def get_appstart_context(post_detail: PostDetail):
 
         return {
             'activated': bool(post_detail) and bool(post_detail.divar_access_token) and bool(post_detail.divar_on_message_setup),
-            'knowledge': '',
+            'knowledge': post_detail.knowledge,
             'private_knowledge': True,
             'tone': 'frieldly',
             'conversations': conversations_summary,
-            'post_status': '',
+            'post_status': post_detail.status,
             'answers_count': 32 # we need to store this data each time we use divar send_message
         }
 
