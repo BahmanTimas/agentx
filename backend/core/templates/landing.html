@@ -183,6 +183,17 @@
         color: #aaa;
         margin-top: 0.5rem;
       }
+      .introduction-images {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .introduction-images img {
+        border-radius: 10px;
+        border: 2px solid #ce1b22;
+      }
     </style>
   </head>
   <body>
@@ -207,7 +218,10 @@
         را بهبود می‌بخشد. پاسخ‌های هوشمند، تخفیف‌های خودکار و بیشتر در اختیار
         شما قرار می‌گیرد.
       </p>
-      {% comment %} <img src="intro-image.gif" alt="AgentX Introduction" /> {% endcomment %}
+      <div class="introduction-images">
+        <img width="230px" src="./statics/1.jpg" alt="AgentX Introduction 1" />
+        <img width="230px" src="./statics/2.jpg" alt="AgentX Introduction 2" />
+      </div>
     </section>
 
     <!DOCTYPE html>
@@ -281,7 +295,7 @@
           <div class="feature-cards">
             <div class="feature-card">
               <i class="fas fa-file-alt"></i>
-              <p>افزودن اطلاعات اضافه مثل متن، ویس و فایل</p>
+              <p>افزودن اطلاعات اضافه به افزونه؛ مثل متن، وُیس و فایل</p>
             </div>
             <div class="feature-card">
               <i class="fas fa-user-secret"></i>
@@ -293,7 +307,7 @@
             </div>
             <div class="feature-card">
               <i class="fas fa-info-circle"></i>
-              <p>نمایش وضعیت آگهی</p>
+              <p>نمایش وضعیت کلی آگهی</p>
             </div>
             <div class="feature-card">
               <i class="fas fa-bell"></i>
