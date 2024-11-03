@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دستیار هوشمند Agent-X</title>
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      body {
+        font-family: "Vazir", Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 2rem;
+        direction: rtl;
+      }
+      .color-primary {
+        color: #ce1b22 !important;
+      }
+      .container {
+        max-width: 600px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 1.1rem 2rem 2rem 2rem;
+        text-align: center;
+        width: 90%;
+      }
+      .header-div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid rgb(179, 179, 179);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .divder {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid rgb(179, 179, 179);
+        padding-bottom: 0.5rem;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        width: fit-content;
+        padding: 2px 20px 0 0px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #ce1b22;
+      }
+      .header p {
+        margin: 0;
+        padding-left: 8px;
+        border-left: 1px solid #ce1b22;
+      }
+      .header p span {
+        /* font-weight: 500; */
+      }
+      .header img {
+        position: relative;
+        top: -2px;
+      }
+      .header3 {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #ce1b22;
+      }
+      .description {
+        min-height: 100px;
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+      .description h3 {
+        color: #cf0505;
+      }
+
+      /* Responsive design */
+      @media (max-width: 600px) {
+        .chat-card {
+          padding: 1rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 1rem;
+        }
+        .container {
+          padding: 1.5rem;
+        }
+        .text-area {
+          height: 120px;
+        }
+        .button-container {
+          flex-direction: column;
+        }
+        .action-button,
+        .cancel-button {
+          margin: 0.5rem 0;
+        }
+        .button-container {
+          margin-top: 1rem;
+        }
+      }
+      @media (max-width: 400px) {
+        .header {
+          padding: 2px 6px 0 0px;
+        }
+        .header p {
+          display: none;
+        }
+        .description {
+          font-size: 0.9rem;
+        }
+        .header3 {
+          font-size: 0.8rem;
+        }
+        .button-container {
+          margin-top: 0.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-div">
+        <h3 class="header3">افزونه مذاکره هوشمند برای فروشندگان دیوار</h3>
+        <a
+          href="https://agentx.darkube.app/"
+          target="_blank"
+          style="text-decoration: none"
+        >
+          <div class="header">
+            <p>AGENT<span>x</span></p>
+            {% load static %}
+            <img
+              width="30"
+              height="30"
+              src="{% static 'AgentXLogo.svg' %}"
+              alt="logo"
+            />
+          </div>
+        </a>
+      </div>
+      {% if error is False %}
+      <div>
+        <div class="description">
+          <h3>لغو آگهی</h3>
+          <p>در حال بازگشت به دیوار</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
