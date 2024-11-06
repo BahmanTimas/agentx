@@ -135,17 +135,16 @@ authorization: {{ identification_key }}
 
 @api_view(["GET"])
 def oauth_callback(request):
-
     if request.GET.get("error"): # TODO
         logging.info(request.GET.get("error"))
         logging.info(request.GET.get("error_description"))
-        return redirect("https://error.com")
+        return render(request, 'error.html', context={"oautherror": True, "return_url": "https://divar.ir/my-divar/my-posts", "error_description": request.GET.get("error_description")})
 
     # scope = request.GET.get("scope")
     state = request.GET.get("state")
-    code = request.GET.get("code")
     divar_post_token = state.split("_")[0]
 
+    code = request.GET.get("code")
     divar_access_token = divar.get_access_token(code)
 
     # get access token save it in the post and return to post return url
