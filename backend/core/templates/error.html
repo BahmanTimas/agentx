@@ -92,7 +92,7 @@
           if (countdown < 0) {
             clearInterval(interval);
             // Redirect to the desired URL
-            window.location.href = "https://www.example.com"; // Replace with your target URL
+            window.location.href = "{{return_url}}";
           }
         }, 1000);
       }
@@ -122,10 +122,20 @@
           </div>
         </a>
       </div>
-      {% if error is False %}
+      {% if cancel is True %}
       <div>
         <div class="description">
           <h3>لغو آگهی</h3>
+          <p>در حال بازگشت به دیوار</p>
+          <div class="countdown" id="countdown">3</div>
+        </div>
+      </div>
+      {% endif %}
+      {% if oautherror is True %}
+      <div>
+        <div class="description">
+          <h3>خطای اهراز هویت</h3>
+          <p>{{error_description}}</p>
           <p>در حال بازگشت به دیوار</p>
           <div class="countdown" id="countdown">3</div>
         </div>
