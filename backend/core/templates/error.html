@@ -21,9 +21,6 @@
         padding: 2rem;
         direction: rtl;
       }
-      .color-primary {
-        color: #ce1b22 !important;
-      }
       .container {
         max-width: 600px;
         background: white;
@@ -41,17 +38,10 @@
         padding-bottom: 0.5rem;
         margin-bottom: 1rem;
       }
-      .divder {
-        width: 100%;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid rgb(179, 179, 179);
-        padding-bottom: 0.5rem;
-      }
       .header {
         display: flex;
         align-items: center;
         gap: 6px;
-        width: fit-content;
         padding: 2px 20px 0 0px;
         border-radius: 6px;
         font-size: 1.2rem;
@@ -62,9 +52,6 @@
         margin: 0;
         padding-left: 8px;
         border-left: 1px solid #ce1b22;
-      }
-      .header p span {
-        /* font-weight: 500; */
       }
       .header img {
         position: relative;
@@ -85,53 +72,34 @@
       .description h3 {
         color: #cf0505;
       }
-
-      /* Responsive design */
-      @media (max-width: 600px) {
-        .chat-card {
-          padding: 1rem;
-        }
-      }
-
-      @media (max-width: 600px) {
-        body {
-          padding: 1rem;
-        }
-        .container {
-          padding: 1.5rem;
-        }
-        .text-area {
-          height: 120px;
-        }
-        .button-container {
-          flex-direction: column;
-        }
-        .action-button,
-        .cancel-button {
-          margin: 0.5rem 0;
-        }
-        .button-container {
-          margin-top: 1rem;
-        }
-      }
-      @media (max-width: 400px) {
-        .header {
-          padding: 2px 6px 0 0px;
-        }
-        .header p {
-          display: none;
-        }
-        .description {
-          font-size: 0.9rem;
-        }
-        .header3 {
-          font-size: 0.8rem;
-        }
-        .button-container {
-          margin-top: 0.3rem;
-        }
+      /* Styling for countdown display */
+      .countdown {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #cf0505;
       }
     </style>
+    <script>
+      function startCountdown() {
+        let countdown = 3;
+        const countdownElement = document.getElementById("countdown");
+
+        // Update the countdown every second
+        const interval = setInterval(() => {
+          countdownElement.textContent = countdown;
+          countdown -= 1;
+
+          if (countdown < 0) {
+            clearInterval(interval);
+            // Redirect to the desired URL
+            window.location.href = "https://www.example.com"; // Replace with your target URL
+          }
+        }, 1000);
+      }
+
+      // Start countdown on page load
+      window.onload = startCountdown;
+    </script>
   </head>
   <body>
     <div class="container">
@@ -159,6 +127,7 @@
         <div class="description">
           <h3>لغو آگهی</h3>
           <p>در حال بازگشت به دیوار</p>
+          <div class="countdown" id="countdown">3</div>
         </div>
       </div>
       {% endif %}
